@@ -20,38 +20,24 @@ Health-related quality of life was measured with the EORTC QLQ-C30. Symptom (fat
 
 ## Uses
 
-<!-- Address questions around how the model is intended to be used, including the foreseeable users of the model and those affected by the model. -->
+Models can be used for research purposes. 
 
 ### Direct Use
 
-<!-- This section is for the model use without fine-tuning or plugging into a larger ecosystem/app. -->
-
-{{ direct_use | default("[More Information Needed]", true)}}
-
-
-### Out-of-Scope Use
-
-<!-- This section addresses misuse, malicious use, and uses that the model will not work well for. -->
-
-{{ out_of_scope_use | default("[More Information Needed]", true)}}
+We DO NOT recommend direct use of the models in any clinical context!  
 
 ## Bias, Risks, and Limitations
 
-<!-- This section is meant to convey both technical and sociotechnical limitations. -->
+Model biases for the following risk groups have been evaluated:
 
-{{ bias_risks_limitations | default("[More Information Needed]", true)}}
+(1) Patients post menopause, 
+(2) Patients with financial difficulties, 
+(3) Patients with obesity (BMI >= 30), 
+(4) Patients with 2 or more comorbidities, 
+(5) Patients with lower educational status (secondary education or lower), 
+(6) Patients with frailty 
 
-### Recommendations
-
-<!-- This section is meant to convey recommendations with respect to the bias, risk, and technical limitations. -->
-
-{{ bias_recommendations | default("Users (both direct and downstream) should be made aware of the risks, biases and limitations of the model. More information needed for further recommendations.", true)}}
-
-## How to Get Started with the Model
-
-Use the code below to get started with the model.
-
-{{ get_started_code | default("[More Information Needed]", true)}}
+Results are mixed and need to be evaluated on a case-by-case basis. 
 
 ## Training Details
 
@@ -60,78 +46,14 @@ Use the code below to get started with the model.
 We described the data pooling here in more detail: https://doi.org/10.1016/j.esmorw.2025.100172 
 In brief, the BALANCE dataset comprises six cohorts with a total of 6316 female, non-metastatic breast cancer patients, including trial data (European Organisation for Research and Treatment of Cancer (EORTC) AMAROS), real-world data (Netherlands Cancer Institute (NKI), district hospital Kufstein, Austria), and observational studies (UMBRELLA, OPTIMUM, and VERDI). Data were collected between 2001 and 2024 and encompass patients receiving active treatment, follow-up, or survivorship care from multiple European countries. 
 
-### Training Procedure
-
-<!-- This relates heavily to the Technical Specifications. Content here should link to that section when it is relevant to the training procedure. -->
-
-#### Preprocessing [optional]
-
-{{ preprocessing | default("[More Information Needed]", true)}}
-
-
-#### Training Hyperparameters
-
-- **Training regime:** {{ training_regime | default("[More Information Needed]", true)}} <!--fp32, fp16 mixed precision, bf16 mixed precision, bf16 non-mixed precision, fp16 non-mixed precision, fp8 mixed precision -->
-
-#### Speeds, Sizes, Times [optional]
-
-<!-- This section provides information about throughput, start/end time, checkpoint size if relevant, etc. -->
-
-{{ speeds_sizes_times | default("[More Information Needed]", true)}}
-
 ## Evaluation
 
-<!-- This section describes the evaluation protocols and provides the results. -->
+Model evaluation was performed in real-world data from the Netherlands Cancer Institute. 
 
-### Testing Data, Factors & Metrics
-
-#### Testing Data
-
-<!-- This should link to a Dataset Card if possible. -->
-
-{{ testing_data | default("[More Information Needed]", true)}}
-
-#### Factors
-
-<!-- These are the things the evaluation is disaggregating by, e.g., subpopulations or domains. -->
-
-{{ testing_factors | default("[More Information Needed]", true)}}
-
-#### Metrics
-
-<!-- These are the evaluation metrics being used, ideally with a description of why. -->
-
-{{ testing_metrics | default("[More Information Needed]", true)}}
-
-### Results
-
-{{ results | default("[More Information Needed]", true)}}
-
-#### Summary
-
-{{ results_summary | default("", true) }}
-
-## Model Examination [optional]
-
-<!-- Relevant interpretability work for the model goes here -->
-
-{{ model_examination | default("[More Information Needed]", true)}}
+## Citation
 
 
 
+## More Information
 
-## Citation [optional]
-
-<!-- If there is a paper or blog post introducing the model, the APA and Bibtex information for that should go in this section. -->
-
-**BibTeX:**
-
-{{ citation_bibtex | default("[More Information Needed]", true)}}
-
-**APA:**
-
-{{ citation_apa | default("[More Information Needed]", true)}}
-
-
-## More Information [optional]
-
+For more information please refer to the referenced publication. 
