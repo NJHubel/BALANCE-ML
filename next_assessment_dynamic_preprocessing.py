@@ -1,18 +1,38 @@
-# This Notebook contains the preprocessing steps for the BALANCE models that predict the next assessment
-
+"""
+This Notebook contains the preprocessing steps for the BALANCE models that predict the next assessment
+"""
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 from constants import targets, get_one_hot_encoded_columns
 
-df0 = pd.read_csv('data/2025-04-11_balance.csv', sep=',', low_memory=False)
+df0 = pd.read_csv('data/2026-01-07_balance.csv', sep=',', low_memory=False)
 
 print("ATTENTION: Select the Sources that should be included in the dataset: \n"
       "1=KUFSTEIN, 2=NKI 3=UMBRELLA, 4=OPTIMUM, 5= VERDI, 7=AMAROS ")
 
-# removing NKI from the data set as it is later used for external validation
-df1 = df0[df0["Source"] != 2]
+df0 = df0[df0["Source"] != 2] # removing NKI from the data set as it is later used for external validation
+
+# Calculate the number of unique BALANCE_IDs in these rows
+num_patients = df0['BALANCE_ID'].nunique()
+print(f"Number of unique BALANCE_IDs (aka patients): {num_patients}")
+
+# if a column is empty for all rows of a source, that column is dropped from the entire dataset.
+to_be_dropped = set()
+for name, group in df0.groupby(['Source']):
+    empty_columns_for_group = group.isna().all()
+    empty_columns_for_group_names = empty_columns_for_group[
+        empty_columns_for_group].index.values
+    to_be_dropped = to_be_dropped.union(set(empty_columns_for_group_names))
+print(
+    f'dropping columns because they are empty for at least one source: {to_be_dropped} \n'
+    f'Uncomment the next line to drop')
+
+
+# TODO: check if you want to drop columns or not
+#df1 = df0.drop(columns=to_be_dropped)
+df1 = df0
 
 # drop columns with zero variance
 to_be_dropped = [col for col in df1.columns if df1[col].nunique() <= 1]
@@ -67,8 +87,7 @@ df.to_csv('data/balance_analysis_set.csv')
 # A2 + A3 |         4 |     ... |        28 |           70
 #
 # Note that the raw data of the second assessment of each pair is not part of the pair
-
-
+#
 Xs, ys = [], []
 patient_ids = df.BALANCE_ID.unique()
 for patient_id in patient_ids:
@@ -90,6 +109,7 @@ y = pd.DataFrame(ys).reset_index(drop=True)
 
 # there should be as many rows in y as there are in X
 assert X.shape[0] == y.shape[0]
+
 
 y.to_pickle('data/cached_y.pckl')
 X.to_pickle('data/cached_X.pckl')
